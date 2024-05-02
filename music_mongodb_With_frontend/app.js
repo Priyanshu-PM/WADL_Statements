@@ -40,6 +40,7 @@ app.post('/addSong', async (req, res) => {
 
 app.get("/listSongs", async (req, res) => {
     const songs = await Song.find();
+    // res.send({"songs": songs})
     res.render('index', {music: songs});
     // res.json({"message": "error"});
 })
@@ -60,6 +61,7 @@ app.get("/songsByDirectorAndSinger/:director/:singer", async (req, res) => {
         Music_director: req.params.director, 
         singer: req.params.singer
     }).then((music) => {
+        // res.send({"music": music});
         res.render("index", {music: music});
     }).catch((error) => {
         res.json({"message": "error"});
@@ -111,7 +113,8 @@ app.get("/songBySingerAndFilm/:singer/:film", async (req, res) => {
         Film: req.params.film
     }).
     then((music) => {
-        res.redirect("index", {music: music});
+        res.send({"music": music});
+        //res.render("index", {music: music});
     }).catch((error) => {
         res.json({"message": "error"});
     });
